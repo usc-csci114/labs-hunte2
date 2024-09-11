@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "bmplib.h"
 #include "unistd.h"
+#include "bmplib.h"
 
 using namespace std;
 

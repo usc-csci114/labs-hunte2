@@ -45,7 +45,7 @@ Your task is to write a program that will read in the input file and produce a .
 
 #### The objects
 
-You will need to add data memebers and method as needed to implement the functionality. The descriptions below may not be complete.
+You will need to add data members and method as needed to implement the functionality. The descriptions below may not be complete.
 
 ```
 struct ColorPixel {

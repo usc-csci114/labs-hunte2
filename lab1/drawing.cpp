@@ -1,15 +1,28 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-
+#include <stdexcept>
 #include "bmplib.h"
 #include "drawing.h"
 
 //implement your classes in this file
 //Point is given for the line drawing algorithm
-struct Point {
-	double x, y;
-};
+void ColorImage::setPixel(ColorPixel p, uint32_t x, uint32_t y){
+	uint32_t ysize = data.size();
+	uint32_t xsize = data[0].size();
+	if (x < xsize && y < ysize){
+		data[y][x] = p;
+	}
+
+}
+ColorPixel ColorImage::getPixel(uint32_t x, uint32_t y){
+	uint32_t ysize = data.size();
+	uint32_t xsize = data[0].size();
+	if (x < xsize && y < ysize){
+		return data[y][x];
+	}
+	throw std::range_error("bad size on getPixel()");
+}
 
 //adapted from https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 std::vector<Point> plotLine(Point start, Point end)
@@ -43,4 +56,11 @@ std::vector<Point> plotLine(Point start, Point end)
 		}
 	}
 	return line;
+}
+
+ColorImage::ColorImage(uint32_t xdim, uint32_t ydim){
+    data.resize(ydim);
+    for(size_t i = 0; i < data.size(); ++i){
+        data[i].resize(xdim);
+    }
 }
