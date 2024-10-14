@@ -23,9 +23,9 @@ struct Line {
 class ColorImage {
 	public:
 		ColorImage(uint32_t xdim, uint32_t ydim);
-		void setPixel(ColorPixel p, uint32_t x, uint32_t y);
+		void setPixel(ColorPixel p, uint32_t x, uint32_t y); //finish
 		ColorPixel getPixel(uint32_t x, uint32_t y);
-		void render(string filename);
+		void render(string filename); //finish
 			
 	private:
 		vector< vector<ColorPixel> > data;

@@ -6,6 +6,9 @@
 
 const int SIZE = 256;
 const int RGB = 3;
+const int R = 0;
+const int G = 1;
+const int B = 2;
 // Note: the read-write functions return 0 on success, 1 on error.
 
 // USE THESE FOR PR4
@@ -13,11 +16,11 @@ const int RGB = 3;
 uint8_t** readGSBMP(const char filename[], int& height, int& width);
 int writeGSBMP(const char filename[], uint8_t **outputImage,int height,int width);
 
-
-
+int writeRGBBMP(const char* filename, unsigned char ***outputImage,int height,int width);
 // THESE ONLY WORK FOR 256x256
 // read grayscale image from the file specified by filename, into inputImage
 int readGSBMP(const char filename[], uint8_t image[][SIZE]);
+
 
 
 // write grayscale image to the file specified by filename, from outputImage

@@ -27,22 +27,27 @@ ColorPixel ColorImage::getPixel(uint32_t x, uint32_t y){
 //adapted from https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
 std::vector<Point> plotLine(Point start, Point end)
 {
-	int x0 = start.x;
-	int y0 = start.y;
-	int x1 = end.x;
-	int y1 = end.y;
+	double x0 = start.x;
+	double y0 = start.y;
+	double x1 = end.x;
+	double y1 = end.y;
 	
-	int dx = abs(x1 - x0);
-	int sx = x0 < x1 ? 1 : -1;
-	int dy = -abs(y1 - y0);
-	int sy = y0 < y1 ? 1 : -1;
-	int error = dx + dy;
+	double dx = abs(x1 - x0);
+	double sx = x0 < x1 ? 1 : -1;
+	double dy = -abs(y1 - y0);
+	double sy = y0 < y1 ? 1 : -1;
+	double error = dx + dy;
 	
 	std::vector<Point> line;
 	
 	while(true)
 	{
-		Point p = {x0, y0};
+		double dx0 = x0;
+		double dy0 = y0;
+		Point p = {dx0, dy0};
+		//Point p;
+		//p.x = x0;
+		//p.y = y0;
 		line.push_back(p);
 		if (x0 == x1 && y0 == y1) break;
 		int e2 = 2 * error;
@@ -63,4 +68,20 @@ ColorImage::ColorImage(uint32_t xdim, uint32_t ydim){
     for(size_t i = 0; i < data.size(); ++i){
         data[i].resize(xdim);
     }
+}
+
+void ColorImage::render(string filename){
+	size_t ydim = data.size();
+	size_t xdim = data[0].size();
+	uint8_t*** image = new uint8_t**[data.size()];
+	for(int i=0; i < data.size(); i++){
+		image[i] = new uint8_t*[xdim];
+		for(int j = 0; j < xdim; j++){
+			image[i][j] = new uint8_t[3];
+			image[i][j][R] = data[i][j].red;
+			image[i][j][G] = data[i][j].green;
+			image[i][j][B] = data[i][j].blue;
+		}
+	}
+	writeRGBBMP(filename.c_str(), image, ydim, xdim);
 }
